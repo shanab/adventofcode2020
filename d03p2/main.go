@@ -29,17 +29,9 @@ func ReadInput() ([][]bool, error) {
 }
 
 func countTrees(area [][]bool, horizontal, vertical int) int {
-	moveHorizontal := func(pos, step int) int {
-		newPos := pos + step
-		if newPos >= len(area[0]) {
-			newPos -= len(area[0])
-		}
-		return newPos
-	}
-
 	var h, v, count int
 	for v < len(area)-1 {
-		h = moveHorizontal(h, horizontal)
+		h = (h + horizontal) % len(area[0])
 		v += vertical
 		if !area[v][h] {
 			count++
